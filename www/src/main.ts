@@ -23,7 +23,10 @@ createApp({
                 this.tick_loop = false;
                 this.field = new Array<number>(this.height * this.width).fill(0)
             }
-            if (n == 2) this.univ = wasm.Universe.init(this.height, this.width, new Uint8Array(this.field));
+            if (n == 2) { 
+                this.univ = null;
+                this.univ = wasm.Universe.init(this.height, this.width, new Uint8Array(this.field));
+            }
         },
         getEl(h: number, w: number): String {
             return this.field[h * this.width + w] == 0 ? '⚙' : '🦀';

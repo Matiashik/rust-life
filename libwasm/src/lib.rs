@@ -1,5 +1,5 @@
 use wasm_bindgen::prelude::*;
-use std::{thread, time::Duration};
+
 //🦀
 //⚙
 
@@ -11,14 +11,14 @@ pub enum Cell {
 
 #[wasm_bindgen]
 pub struct Universe {
-    pub width: u8,
-    pub height: u8,
+    pub width: u16,
+    pub height: u16,
     cells: Vec<Vec<Cell>>,
 }
 
 #[wasm_bindgen]
 impl Universe {
-    pub fn init(h: u8, w: u8, field: &[u8]) -> Universe {
+    pub fn init(h: u16, w: u16, field: &[u8]) -> Universe {
         return Universe {
             height: h,
             width: w,
