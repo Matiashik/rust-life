@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>⚙Rust life🦀</title>
+</head>
+
+<script type="module" src="/src/main.ts"></script>
+
+<body id="app">
+
+
+  <div v-show="phase=='size-setup'">
+    <h1>Size setup</h1>
+    <div>
+      <input type="range" v-model="height" min="5" max="15">
+      <a>{{ height }}</a>
+    </div>
+    <div>
+      <input type="range" v-model="width" min="5" max="15">
+      <a>{{ width }}</a>
+    </div>
+    <button @click="chphase(1)">{{ 'Ready' }}</button>
+    <div>
+      <template v-for="h in heightR">
+        <div>
+          <template v-for="w in widthR">
+            <a class='flm'>{{ this.getEl(h, w) }}</a>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+
+
+  <div v-if="phase=='life-setup'">
+    <h1>Life setup</h1>
+    <div>
+      <input type="range" v-model="height" min="5" max="15" disabled>
+      <a>{{ height }}</a>
+    </div>
+    <div>
+      <input type="range" v-model="width" min="5" max="15" disabled>
+      <a>{{ width }}</a>
+    </div>
+    <button @click="chphase(0)">{{ 'Resize' }}</button>
+    <button @click="chphase(2)">{{ 'Ready' }}</button>
+    <div>
+      <template v-for="h in heightR">
+        <div>
+          <template v-for="w in widthR">
+            <a v-on:click="setEl(h, w)" class='clc'>{{ this.getEl(h, w) }}</a>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+
+
+  <div v-show="phase=='game'">
+    <h1>Game</h1>
+    <div>
+      <input type="range" v-model="height" min="5" max="15" disabled>
+      <a>{{ height }}</a>
+    </div>
+    <div>
+      <input type="range" v-model="width" min="5" max="15" disabled>
+      <a>{{ width }}</a>
+    </div>
+    <button @click="chphase(0)">{{ 'Refresh' }}</button>
+    <button @click="tick()">tick</button>
+    <div>
+      <template v-for="h in heightR">
+        <div>
+          <template v-for="w in widthR">
+            <a class='flm'>{{ this.getEl(h, w) }}</a>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+
+</body>
+
+</html>

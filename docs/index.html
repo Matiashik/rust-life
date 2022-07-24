@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="box" id="headbox">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.png">
+  <title>Rust's Game of Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="module" crossorigin src="/assets/index.4c0b534c.js"></script>
+  <link rel="stylesheet" href="/assets/index.32453759.css">
+</head>
+
+
+
+<body id="app">
+
+  <template class="box" id="header">
+    <p class="title is-3">⚙ Rust's Game of Life 🦀</p>
+  </template>
+
+  <template v-if="phase!='game'">
+    <template class="box" id="rules">
+      <div class="content">
+        <p class="title is-4">The Game of Life rules are simple:</p>
+        <h5 style="color: #fbf1c7;">🦀 Any live cell with two or three live neighbours survives.</h5>
+        <h5 style="color: #fbf1c7;">🦀 Any dead cell with three live neighbours becomes a live cell.</h5>
+        <h5 style="color: #fbf1c7;">⚙ All other live cells die in the next generation. Similarly, all other dead cells
+          stay dead.</h5>
+      </div>
+    </template>
+  </template>
+
+
+  <template class="box" id="size-setup">
+    <a>
+      <a class="title is-6" style="margin-right: 10px;">Height is {{height}}</a>
+      <input type="range" v-model="height" min="5" max="20" id="h" v-if="phase=='size-setup'">
+      <input type="range" v-model="height" min="5" max="20" id="h" v-else disabled>
+    </a>
+    <a>
+      <a class="title is-6" style="margin-right: 16px;">Width is {{width}}</a>
+      <input type="range" v-model="width" min="5" max="20" id="w" v-if="phase=='size-setup'">
+      <input type="range" v-model="width" min="5" max="20" id="w" v-else disabled>
+    </a>
+    <a>
+      <button style="margin-bottom: 5px;border-radius: 20px; background-color: #d65d0e; border: none; color: #fbf1c7;"
+        @click="chphase(1)" class="button is-small is-hovered" v-if="phase=='size-setup'">
+        Ready
+      </button>
+      <button style="margin-bottom: 5px;border-radius: 20px; background-color: #d65d0e; border: none; color: #fbf1c7;"
+        @click="chphase(2)" class="button is-small is-hovered" v-else-if="phase=='life-setup'">
+        Start
+      </button>
+      <button style="margin-bottom: 5px;border-radius: 20px; background-color: #d65d0e; border: none; color: #fbf1c7;"
+        @click="chphase(0)" class="button is-small is-hovered" v-else>
+        Restart
+      </button>
+      <button
+        style="margin-left: 5px; margin-bottom: 5px; border-radius: 20px; background-color: #d65d0e; border: none; color: #fbf1c7;"
+        @click="tick()" class="button is-small is-hovered" v-show="phase=='game'">
+        <img src="/stop.png" style="height: 10px; width:10px" v-if="tick_loop">
+        <img src="/play.png" style="height: 10px; width:10px" v-else>
+      </button>
+    </a>
+    <a>
+      <a class="title is-6" style="margin-left: 10px;" v-show="phase=='life-setup'">
+        Please, set up Life🦀 cells by clicking Dead⚙ cells
+      </a>
+    </a>
+    <a style="margin-left: 15px;">
+      <a class="title is-6" style="margin-right: 16px;" v-show="phase=='game'">Tick time is {{loop_speed}}ms</a>
+      <input type="range" v-model="loop_speed" min="50" max="2000" step="50" id="s" v-show="phase=='game'">
+    </a>
+  </template>
+
+  <template class="box" id="game">
+    <template class="box" id="field">
+      <div v-if="phase=='life-setup'">
+        <div>
+          <template v-for="h in heightR">
+            <div>
+              <template v-for="w in widthR">
+                <a v-on:click="setEl(h, w)" class='dot' style="cursor: pointer;">{{ this.getEl(h, w) }}</a>
+              </template>
+            </div>
+          </template>
+        </div>
+      </div>
+      <div v-else>
+        <template v-for="h in heightR">
+          <div>
+            <template v-for="w in widthR">
+              <a class='dot'>{{ this.getEl(h, w) }}</a>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+  </template>
+
+
+</body>
+
+</html>
