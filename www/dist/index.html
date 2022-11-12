@@ -6,8 +6,8 @@
   <link rel="icon" href="/favicon.png">
   <title>Rust's Game of Life</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="module" crossorigin src="/assets/index.0da0a641.js"></script>
-  <link rel="stylesheet" href="/assets/index.32453759.css">
+  <script type="module" crossorigin src="/assets/index.bc0ea17e.js"></script>
+  <link rel="stylesheet" href="/assets/index.c14ab6c0.css">
 </head>
 
 
@@ -72,7 +72,7 @@
       <input type="range" v-model="loop_speed" min="50" max="2000" step="50" id="s" v-show="phase=='game'">
     </a>
   </template>
-  
+
   <template class="box" id="game">
     <template class="box" id="field">
       <div v-if="phase=='life-setup'">
@@ -80,7 +80,7 @@
           <template v-for="h in heightR">
             <div>
               <template v-for="w in widthR">
-                <a v-on:click="setEl(h, w)" class='dot' style="cursor: pointer;">{{ this.getEl(h, w) }}</a>
+                <div v-on:click="setEl(h, w)" class='dot' style="cursor: pointer;">{{ this.getEl(h, w) }}</div>
               </template>
             </div>
           </template>
@@ -90,7 +90,7 @@
         <template v-for="h in heightR">
           <div>
             <template v-for="w in widthR">
-              <a class='dot'>{{ this.getEl(h, w) }}</a>
+                <div class='dot'>{{ this.getEl(h, w) }}</div>
             </template>
           </div>
         </template>

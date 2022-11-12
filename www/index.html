@@ -70,7 +70,7 @@
       <input type="range" v-model="loop_speed" min="50" max="2000" step="50" id="s" v-show="phase=='game'">
     </a>
   </template>
-  
+
   <template class="box" id="game">
     <template class="box" id="field">
       <div v-if="phase=='life-setup'">
@@ -78,7 +78,7 @@
           <template v-for="h in heightR">
             <div>
               <template v-for="w in widthR">
-                <a v-on:click="setEl(h, w)" class='dot' style="cursor: pointer;">{{ this.getEl(h, w) }}</a>
+                <div v-on:click="setEl(h, w)" class='dot' style="cursor: pointer;">{{ this.getEl(h, w) }}</div>
               </template>
             </div>
           </template>
@@ -88,7 +88,7 @@
         <template v-for="h in heightR">
           <div>
             <template v-for="w in widthR">
-              <a class='dot'>{{ this.getEl(h, w) }}</a>
+                <div class='dot'>{{ this.getEl(h, w) }}</div>
             </template>
           </div>
         </template>
